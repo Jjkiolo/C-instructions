@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete C++ Reference Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 10px;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .section-header:hover {
+            background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+        }
+        
+        .section-content {
+            padding: 20px;
+            display: none;
+        }
+        
+        .section-content.active {
+            display: block;
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+        
+        .section.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #e74c3c;
+            font-size: 0.9em;
+        }
+        
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: #abb2bf;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            overflow-x: auto;
+            display: block;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .pattern-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        
+        .key-badge {
+            background: #27ae60;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .tip {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .toc {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .toc a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .expand-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .expand-all:hover {
+            background: #2980b9;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            h2 {
+                font-size: 1.3em;
+            }
+            
+            pre {
+                font-size: 0.8em;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 0.85em;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+        }
+        
+        .keyword { color: #c678dd; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
+        .function { color: #61afef; }
+        .number { color: #d19a66; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Complete C++ Reference Guide</h1>
+        
+        <button class="expand-all" onclick="toggleAll()">Expand All Sections</button>
+        
+        <div class="toc">
+            <h2>📑 Quick Navigation</h2>
+            <ul>
+                <li><a href="#ref-table">Quick Reference Table</a></li>
+                <li><a href="#fundamentals">Core Fundamentals</a></li>
+                <li><a href="#oop">Object-Oriented Programming</a></li>
+                <li><a href="#containers">STL Containers</a></li>
+                <li><a href="#leetcode">LeetCode Patterns</a></li>
+                <li><a href="#memory">Memory Management</a></li>
+                <li><a href="#modern">Modern C++ Features</a></li>
+                <li><a href="#patterns">Design Patterns</a></li>
+                <li><a href="#algorithms">Algorithms & STL</a></li>
+            </ul>
+        </div>
+
+        <!-- Quick Reference -->
+        <div id="ref-table" class="section active">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span>🎯 Quick Reference Table</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content active">
+                <h3>Container Selection Guide</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Container</th>
+                            <th>Mental Model</th>
+                            <th>Best For</th>
+                            <th>Time Complexity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>vector&lt;T&gt;</code></td>
+                            <td>Dynamic array</td>
+                            <td>Default choice, random access</td>
+                            <td>O(1) access, O(n) insert</td>
+                        </tr>
+                        <tr>
+                            <td><code>string</code></td>
+                            <td>Char array</td>
+                            <td>Text, sliding window</td>
+                            <td>O(1) access</td>
+                        </tr>
+                        <tr>
+                            <td><code>unordered_map&lt;K,V&gt;</code></td>
+                            <td>Hash table</td>
+                            <td>Two Sum, frequency counts</td>
+                            <td>O(1) avg lookup</td>
+                        </tr>
+                        <tr>
+                            <td><code>unordered_set&lt;T&gt;</code></td>
+                            <td>Hash set</td>
+                            <td>Membership test, visited</td>
+                            <td>O(1) avg lookup</td>
+                        </tr>
+                        <tr>
+                            <td><code>map&lt;K,V&gt;</code> / <code>set&lt;T&gt;</code></td>
+                            <td>Sorted tree</td>
+                            <td>Ordered data, intervals</td>
+                            <td>O(log n) operations</td>
+                        </tr>
+                        <tr>
+                            <td><code>stack&lt;T&gt;</code></td>
+                            <td>Plates (LIFO)</td>
+                            <td>Parentheses, monotonic stack</td>
+                            <td>O(1) push/pop</td>
+                        </tr>
+                        <tr>
+                            <td><code>queue&lt;T&gt;</code></td>
+                            <td>Line (FIFO)</td>
+                            <td>BFS, level traversal</td>
+                            <td>O(1) push/pop</td>
+                        </tr>
+                        <tr>
+                            <td><code>deque&lt;T&gt;</code></td>
+                            <td>Double-ended</td>
+                            <td>Sliding window max</td>
+                            <td>O(1) both ends</td>
+                        </tr>
+                        <tr>
+                            <td><code>priority_queue&lt;T&gt;</code></td>
+                            <td>Heap</td>
+                            <td>Top-K, Dijkstra</td>
+                            <td>O(log n) insert</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Critical Syntax Rules</h3>
+                <pre><code>std::X              // X from standard library
+T&                  // Reference (modifies original)
+const T&            // Read-only reference (no copy)
+auto                // Type inferred from RHS
+begin(), end()      // Iterator range [begin, end)
+[](...) { ... }     // Lambda (inline function)
+class Solution { public: ... }  // LeetCode requirement</code></pre>
+            </div>
+        </div>
+
+        <!-- Core Fundamentals -->
+        <div id="fundamentals" class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span>🔧 Core Fundamentals</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Basic Types and Declarations</h3>
+                <pre><code><span class="comment">// Primitive types</span>
+<span class="keyword">int</span> age = <span class="number">25</span>;
+<span class="keyword">double</span> price = <span class="number">99.99</span>;
+<span class="keyword">char</span> grade = <span class="string">'A'</span>;
+<span class="keyword">bool</span> isActive = <span class="keyword">true</span>;
+
+<span class="comment">// Constants</span>
+<span class="keyword">const double</span> PI = <span class="number">3.14159</span>;
+<span class="keyword">constexpr int</span> MAX_SIZE = <span class="number">100</span>;
+
+<span class="comment">// Auto type deduction</span>
+<span class="keyword">auto</span> x = <span class="number">42</span>;              <span class="comment">// int</span>
+<span class="keyword">auto</span> y = <span class="number">3.14</span>;            <span class="comment">// double</span></code></pre>
+
+                <h3>References vs Pointers</h3>
+                <pre><code><span class="keyword">void</span> <span class="function">demo</span>() {
+    <span class="keyword">int</span> value = <span class="number">42</span>;
+    
+    <span class="comment">// Reference (alias)</span>
+    <span class="keyword">int</span>& ref = value;
+    ref = <span class="number">100</span>;  <span class="comment">// Changes value to 100</span>
+    
+    <span class="comment">// Pointer (stores address)</span>
+    <span class="keyword">int</span>* ptr = &value;
+    *ptr = <span class="number">200</span>;  <span class="comment">// Dereference and change</span>
+}</code></pre>
+
+                <h3>Static Keyword (Two Meanings)</h3>
+                <div class="note">
+                    <strong>Important:</strong> Static has different meanings depending on context.
+                </div>
+                <pre><code><span class="comment">// 1. File scope - limits visibility</span>
+<span class="keyword">static void</span> <span class="function">helper</span>() {
+    <span class="comment">// Only visible in this .cpp file</span>
+}
+
+<span class="comment">// 2. Local variable - persists across calls</span>
+<span class="keyword">int</span> <span class="function">generateId</span>() {
+    <span class="keyword">static int</span> id = <span class="number">0</span>;  <span class="comment">// Initialized once</span>
+    <span class="keyword">return</span> ++id;        <span class="comment">// Returns 1, 2, 3...</span>
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- OOP -->
+        <div id="oop" class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span>🏗️ Object-Oriented Programming</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Classes and Encapsulation</h3>
+                <pre><code><span class="keyword">class</span> BankAccount {
+<span class="keyword">private</span>:
+    std::string accountNumber;
+    <span class="keyword">double</span> balance;
+    
+<span class="keyword">public</span>:
+    <span class="comment">// Constructor with initializer list</span>
+    <span class="function">BankAccount</span>(std::string num, <span class="keyword">double</span> bal) 
+        : accountNumber(num), balance(bal) {}
+    
+    <span class="comment">// Const methods (don't modify object)</span>
+    <span class="keyword">double</span> <span class="function">getBalance</span>() <span class="keyword">const</span> { <span class="keyword">return</span> balance; }
+    
+    <span class="comment">// Mutator methods</span>
+    <span class="keyword">bool</span> <span class="function">deposit</span>(<span class="keyword">double</span> amount) {
+        <span class="keyword">if</span>(amount > <span class="number">0</span>) {
+            balance += amount;
+            <span class="keyword">return true</span>;
+        }
+        <span class="keyword">return false</span>;
+    }
+};</code></pre>
+
+                <h3>Inheritance and Polymorphism</h3>
+                <pre><code><span class="comment">// Abstract base class</span>
+<span class="keyword">class</span> Shape {
+<span class="keyword">protected</span>:
+    std::string color;
+    
+<span class="keyword">public</span>:
+    <span class="function">Shape</span>(std::string c) : color(c) {}
+    <span class="keyword">virtual</span> ~<span class="function">Shape</span>() {}
+    
+    <span class="comment">// Pure virtual (abstract)</span>
+    <span class="keyword">virtual double</span> <span class="function">area</span>() <span class="keyword">const</span> = <span class="number">0</span>;
+    
+    <span class="keyword">virtual void</span> <span class="function">draw</span>() <span class="keyword">const</span> {
+        std::cout << <span class="string">"Drawing "</span> << color << <span class="string">" shape\n"</span>;
+    }
+};
+
+<span class="keyword">class</span> Circle : <span class="keyword">public</span> Shape {
+<span class="keyword">private</span>:
+    <span class="keyword">double</span> radius;
+    
+<span class="keyword">public</span>:
+    <span class="function">Circle</span>(std::string c, <span class="keyword">double</span> r) : Shape(c), radius(r) {}
+    
+    <span class="keyword">double</span> <span class="function">area</span>() <span class="keyword">const override</span> {
+        <span class="keyword">return</span> <span class="number">3.14159</span> * radius * radius;
+    }
+};</code></pre>
+            </div>
+        </div>
+
+        <!-- STL Containers -->
+        <div id="containers" class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span>📦 STL Containers</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Vector - Dynamic Array</h3>
+                <pre><code><span class="comment">// Creation and initialization</span>
+std::vector<<span class="keyword">int</span>> v1;                     <span class="comment">// Empty</span>
+std::vector<<span class="keyword">int</span>> v2(<span class="number">5</span>);                  <span class="comment">// 5 elements, value 0</span>
+std::vector<<span class="keyword">int</span>> v3 = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>};
+
+<span class="comment">// Adding elements</span>
+v1.<span class="function">push_back</span>(<span class="number">1</span>);      <span class="comment">// Add to end</span>
+v1.<span class="function">emplace_back</span>(<span class="number">2</span>);   <span class="comment">// Construct in place</span>
+
+<span class="comment">// Access</span>
+<span class="keyword">int</span> first = v3[<span class="number">0</span>];
+<span class="keyword">int</span> last = v3.<span class="function">back</span>();
+<span class="keyword">int</span> at = v3.<span class="function">at</span>(<span class="number">1</span>);      <span class="comment">// With bounds check</span>
+
+<span class="comment">// Iteration</span>
+<span class="keyword">for</span>(<span class="keyword">int</span> x : v3) {
+    std::cout << x << <span class="string">" "</span>;
+}</code></pre>
+
+                <h3>Map and Unordered Map</h3>
+                <pre><code><span class="comment">// Ordered map (sorted keys)</span>
+std::map<std::string, <span class="keyword">int</span>> ages;
+ages[<span class="string">"Alice"</span>] = <span class="number">25</span>;
+ages[<span class="string">"Bob"</span>] = <span class="number">30</span>;
+
+<span class="comment">// Check existence</span>
+<span class="keyword">if</span>(ages.<span class="function">find</span>(<span class="string">"Alice"</span>) != ages.<span class="function">end</span>()) {
+    std::cout << <span class="string">"Found!\n"</span>;
+}
+<span class="keyword">if</span>(ages.<span class="function">count</span>(<span class="string">"Bob"</span>)) {
+    std::cout << <span class="string">"Found Bob!\n"</span>;
+}
+
+<span class="comment">// Unordered map (hash table, faster)</span>
+std::unordered_map<<span class="keyword">int</span>, std::string> idToName;
+idToName[<span class="number">1</span>] = <span class="string">"Alice"</span>;</code></pre>
+
+                <h3>Stack, Queue, Deque</h3>
+                <pre><code><span class="comment">// Stack (LIFO)</span>
+std::stack<<span class="keyword">int</span>> stk;
+stk.<span class="function">push</span>(<span class="number">1</span>);
+stk.<span class="function">push</span>(<span class="number">2</span>);
+std::cout << stk.<span class="function">top</span>() << <span class="string">"\n"</span>;  <span class="comment">// 2</span>
+stk.<span class="function">pop</span>();
+
+<span class="comment">// Queue (FIFO)</span>
+std::queue<std::string> q;
+q.<span class="function">push</span>(<span class="string">"first"</span>);
+q.<span class="function">push</span>(<span class="string">"second"</span>);
+std::cout << q.<span class="function">front</span>() << <span class="string">"\n"</span>;  <span class="comment">// first</span>
+q.<span class="function">pop</span>();
+
+<span class="comment">// Priority Queue (Max Heap)</span>
+std::priority_queue<<span class="keyword">int</span>> pq;
+pq.<span class="function">push</span>(<span class="number">30</span>);
+pq.<span class="function">push</span>(<span class="number">10</span>);
+pq.<span class="function">push</span>(<span class="number">20</span>);
+std::cout << pq.<span class="function">top</span>() << <span class="string">"\n"</span>;  <span class="comment">// 30</span></code></pre>
+            </div>
+        </div>
+
+        <!-- LeetCode Patterns -->
+        <div id="leetcode" class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span>💡 LeetCode Patterns</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Pattern 1: Two Sum (Hash Map)</h3>
+                <div class="pattern-badge">LeetCode 1</div>
+                <pre><code><span class="keyword">class</span> Solution {
+<span class="keyword">public</span>:
+    std::vector<<span class="keyword">int</span>> <span class="function">twoSum</span>(std::vector<<span class="keyword">int</span>>& nums, <span class="keyword">int</span> target) {
+        std::unordered_map<<span class="keyword">int</span>, <span class="keyword">int</span>> seen;
+        
+        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i < nums.<span class="function">size</span>(); i++) {
+            <span class="keyword">int</span> complement = target - nums[i];
+            
+            <span class="keyword">if</span>(seen.<span class="function">count</span>(complement)) {
+                <span class="keyword">return</span> {seen[complement], i};
+            }
+            seen[nums[i]] = i;
+        }
+        <span class="keyword">return</span> {};
+    }
+};</code></pre>
+                <div class="key-badge">Pattern: Check complement → store current</div>
+                <div class="key-badge">Key: Unordered map for O(1) lookups</div>
+
+                <h3>Pattern 2: Valid Parentheses (Stack)</h3>
+                <div class="pattern-badge">LeetCode 20</div>
+                <pre><code><span class="keyword">class</span> Solution {
+<span class="keyword">public</span>:
+    <span class="keyword">bool</span> <span class="function">isValid</span>(std::string s) {
+        std::stack<<span class="keyword">char</span>> stk;
+        
+        <span class="keyword">for</span>(<span class="keyword">char</span> c : s) {
+            <span class="keyword">if</span>(c == <span class="string">'('</span> || c == <span class="string">'{'</span> || c == <span class="string">'['</span>) {
+                stk.<span class="function">push</span>(c);
+            } <span class="keyword">else</span> {
+                <span class="keyword">if</span>(stk.<span class="function">empty</span>()) <span class="keyword">return false</span>;
+                <span class="keyword">char</span> top = stk.<span class="function">top</span>();
+                stk.<span class="function">pop</span>();
+                
+                <span class="keyword">if</span>((c == <span class="string">')'</span> && top != <span class="string">'('</span>) ||
+                   (c == <span class="string">'}'</span> && top != <span class="string">'{'</span>) ||
+                   (c == <span class="string">']'</span> && top != <span class="string">'['</span>))
+                    <span class="keyword">return false</span>;
+            }
+        }
+        <span class="keyword">return</span> stk.<span class="function">empty</span>();
+    }
+};</code></pre>
+                <div class="key-badge">Pattern: LIFO matching</div>
+
+                <h3>Pattern 3: BFS on Grid</h3>
+                <div class="pattern-badge">LeetCode 200 - Number of Islands</div>
+                <pre><code><span class="keyword">int</span> <span class="function">numIslands</span>(vector<vector<<span class="keyword">char</span>>>& grid) {
+    <span class="keyword">int</span> rows = grid.<span class="function">size</span>();
+    <span class="keyword">int</span> cols = grid[<span class="number">0</span>].<span class="function">size</span>();
+    <span class="keyword">int</span> islands = <span class="number">0</span>;
+    
+    <span class="keyword">int</span> dr[] = {<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>};
+    <span class="keyword">int</span> dc[] = {<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>};
+    
+    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r < rows; r++) {
+        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c < cols; c++) {
+            <span class="keyword">if</span>(grid[r][c] != <span class="string">'1'</span>) <span class="keyword">continue</span>;
+            
+            islands++;
+            grid[r][c] = <span class="string">'0'</span>;  <span class="comment">// Mark visited</span>
+            
+            queue<pair<<span class="keyword">int</span>,<span class="keyword">int</span>>> q;
+            q.<span class="function">push</span>({r, c});
+            
+            <span class="keyword">while</span>(!q.<span class="function">empty</span>()) {
+                <span class="keyword">auto</span> [cr, cc] = q.<span class="function">front</span>();
+                q.<span class="function">pop</span>();
+                
+                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k < <span class="number">4</span>; k++) {
+                    <span class="keyword">int</span> nr = cr + dr[k];
+                    <span class="keyword">int</span> nc = cc + dc[k];
+                    
+                    <span class="keyword">if</span>(nr < <span class="number">0</span> || nr >= rows || nc < <span class="number">0</span> || nc >= cols)
+                        <span class="keyword">continue</span>;
+                    <span class="keyword">if</span>(grid[nr][nc] != <span class="string">'1'</span>) <span class="keyword">continue</span>;
+                    
+                    grid[nr][nc] = <span class="string">'0'</span>;
+                    q.<span class="function">push</span>({nr, nc});
+                }
+            }
+        }
+    }
+    <span class="keyword">return</span> islands;
+}</code></pre>
+                <div class="key-badge">Pattern: BFS + mark visited</div>
+                <div class="key-badge">Key: Queue for level-by-level exploration</div>
+
+                <h3>Pattern 4: Top K Frequent (Heap)</h3>
+                <div class="pattern-badge">LeetCode 347</div>
+                <pre><code>vector<<span class="keyword">int</span>> <span class="function">topKFrequent</span>(vector<<span class="keyword">int</span>>& nums, <span class="keyword">int</span> k) {
+    <span class="comment">// Count frequencies</span>
+    unordered_map<<span class="keyword">int</span>, <span class="keyword">int</span>> freq;
+    <span class="keyword">for</span>(<span class="keyword">int</span> x : nums) freq[x]++;
+    
+    <span class="comment">// Min-heap of (frequency, value)</span>
+    <span class="keyword">using</span> P = pair<<span class="keyword">int</span>, <span class="keyword">int</span>>;
+    <span class="keyword">auto</span> cmp = [](const P& a, const P& b) {
+        <span class="keyword">return</span> a.first > b.first;
+    };
+    priority_queue<P, vector<P>, decltype(cmp)> heap(cmp);
+    
+    <span class="keyword">for</span>(<span class="keyword">const auto</span>& [val, f] : freq) {
+        heap.<span class="function">push</span>({f, val});
+        <span class="keyword">if</span>(heap.<span class="function">size</span>() > k) heap.<span class="function">pop</span>();
+    }
+    
+    vector<<span class="keyword">int</span>> result;
+    <span class="keyword">while</span>(!heap.<span class="function">empty</span>()) {
+        result.<span class="function">push_back</span>(heap.<span class="function">top</span>().second);
+        heap.<span class="function">pop</span>();
+    }
+    <span class="keyword">return</span> result;
+}</code></pre>
+                <div class="key-badge">Pattern: Keep best K using min-heap</div>
+
+                <h3>Pattern 5: Sliding Window Maximum</h3>
+                <div class="pattern-badge">LeetCode 239</div>
+                <pre><code>vector<<span class="keyword">int</span>> <span class="function">maxSlidingWindow</span>(vector<<span class="keyword">int</span>>& nums, <span class="keyword">int</span> k) {
+    deque<<span class="keyword">int</span>> dq;  <span class="comment">// Stores indices</span>
+    vector<<span class="keyword">int</span>> result;
+    
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i < nums.<span class="function">size</span>(); i++) {
+        <span class="comment">// Remove indices outside window</span>
+        <span class="keyword">if</span>(!dq.<span class="function">empty</span>() && dq.<span class="function">front</span>() <= i - k)
+            dq.<span class="function">pop_front</span>();
+        
+        <span class="comment">// Maintain decreasing order</span>
+        <span class="keyword">while</span>(!dq.<span class="function">empty</span>() && nums[dq.<span class="function">back</span>()] <= nums[i])
+            dq.<span class="function">pop_back</span>();
+        
+        dq.<span class="function">push_back</span>(i);
+        
+        <span class="keyword">if</span>(i >= k - <span class="number">1</span>)
+            result.<span class="function">push_back</span>(nums[dq.<span class="function">front</span>()]);
+    }
+    <span class="keyword">return</span> result;
+}</code></pre>
+                <div class="key-badge">Pattern: Monotonic deque</div>
+            </div>
+        </div>
+
+        <!-- Memory Management -->
+        <div id="memory" class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span>🧠 Memory Management</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Smart Pointers</h3>
+                <pre><code><span class="comment">// unique_ptr - Single ownership</span>
+std::unique_ptr<Resource> p1 = std::make_unique<Resource>();
+p1-><span class="function">use</span>();
+std::unique_ptr<Resource> p2 = std::move(p1);  <span class="comment">// Transfer</span>
+
+<span class="comment">// shared_ptr - Shared ownership</span>
+std::shared_ptr<Resource> s1 = std::make_shared<Resource>();
+{
+    std::shared_ptr<Resource> s2 = s1;
+    std::cout << s1.<span class="function">use_count</span>() << <span class="string">"\n"</span>;  <span class="comment">// 2</span>
+}
+std::cout << s1.<span class="function">use_count</span>() << <span class="string">"\n"</span>;  <span class="comment">// 1</span>
+
+<span class="comment">// weak_ptr - Non-owning reference</span>
+std::weak_ptr<Resource> w = s1;
+<span class="keyword">if</span>(<span class="keyword">auto</span> locked = w.<span class="function">lock</span>()) {
+    locked-><span class="function">use</span>();
+}</code></pre>
+
+                <div class="tip">
+                    <strong>💡 Tip:</strong> Always prefer smart pointers over raw pointers. They provide automatic memory management and prevent memory leaks.
+                </div>
+            </div>
+        </div>
+
+        <!-- Modern C++ -->
+        <div id="modern" class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span>✨ Modern C++ Features</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Lambda Functions</h3>
+                <pre><code><span class="comment">// Basic lambda</span>
+<span class="keyword">auto</span> greet = []() {
+    std::cout << <span class="string">"Hello!\n"</span>;
+};
+
+<span class="comment">// With parameters</span>
+<span class="keyword">auto</span> add = [](<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+    <span class="keyword">return</span> a + b;
+};
+
+<span class="comment">// Capture by value</span>
+<span class="keyword">int</span> x = <span class="number">10</span>;
+<span class="keyword">auto</span> printX = [x]() {
+    std::cout << x << <span class="string">"\n"</span>;
+};
+
+<span class="comment">// Capture by reference</span>
+<span class="keyword">auto</span> modifyX = [&x]() {
+    x = <span class="number">20</span>;
+};
+
+<span class="comment">// With STL algorithms</span>
+std::vector<<span class="keyword">int</span>> v = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>};
+std::sort(v.<span class="function">begin</span>(), v.<span class="function">end</span>(),
+          [](<span class="keyword">int</span> a, <span class="keyword">int</span> b) { <span class="keyword">return</span> a > b; });</code></pre>
+
+                <h3>Structured Bindings (C++17)</h3>
+                <pre><code><span class="comment">// With pairs</span>
+std::pair<<span class="keyword">int</span>, std::string> p = {<span class="number">1</span>, <span class="string">"Alice"</span>};
+<span class="keyword">auto</span> [id, name] = p;
+
+<span class="comment">// With maps</span>
+std::map<std::string, <span class="keyword">int</span>> ages = {{<span class="string">"Alice"</span>, <span class="number">25</span>}};
+<span class="keyword">for</span>(<span class="keyword">const auto</span>& [name, age] : ages) {
+    std::cout << name << <span class="string">": "</span> << age << <span class="string">"\n"</span>;
+}</code></pre>
+
+                <h3>Auto Type Deduction</h3>
+                <pre><code><span class="keyword">auto</span> x = <span class="number">42</span>;                           <span class="comment">// int</span>
+<span class="keyword">auto</span> y = <span class="number">3.14</span>;                         <span class="comment">// double</span>
+<span class="keyword">auto</span> name = std::string(<span class="string">"John"</span>);    <span class="comment">// std::string</span>
+
+std::vector<<span class="keyword">int</span>> v = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>};
+<span class="keyword">auto</span> it = v.<span class="function">begin</span>();               <span class="comment">// iterator</span></code></pre>
+            </div>
+        </div>
+
+        <!-- Design Patterns -->
+        <div id="patterns" class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span>🎨 Design Patterns</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Singleton Pattern</h3>
+                <pre><code><span class="keyword">class</span> Database {
+<span class="keyword">public</span>:
+    <span class="keyword">static</span> Database& <span class="function">getInstance</span>() {
+        <span class="keyword">static</span> Database instance;
+        <span class="keyword">return</span> instance;
+    }
+    
+    Database(<span class="keyword">const</span> Database&) = <span class="keyword">delete</span>;
+    Database& <span class="keyword">operator</span>=(<span class="keyword">const</span> Database&) = <span class="keyword">delete</span>;
+    
+<span class="keyword">private</span>:
+    <span class="function">Database</span>() {}
+};</code></pre>
+
+                <h3>Factory Pattern</h3>
+                <pre><code><span class="keyword">class</span> VehicleFactory {
+<span class="keyword">public</span>:
+    <span class="keyword">enum</span> Type { CAR, MOTORCYCLE };
+    
+    <span class="keyword">static</span> std::unique_ptr<Vehicle> <span class="function">create</span>(Type type) {
+        <span class="keyword">switch</span>(type) {
+            <span class="keyword">case</span> CAR: <span class="keyword">return</span> std::make_unique<Car>();
+            <span class="keyword">case</span> MOTORCYCLE: <span class="keyword">return</span> std::make_unique<Motorcycle>();
+        }
+    }
+};</code></pre>
+            </div>
+        </div>
+
+        <!-- Algorithms -->
+        <div id="algorithms" class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span>🔍 Algorithms & STL</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Common STL Algorithms</h3>
+                <pre><code>std::vector<<span class="keyword">int</span>> v = {<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>};
+
+<span class="comment">// Sorting</span>
+std::sort(v.<span class="function">begin</span>(), v.<span class="function">end</span>());
+
+<span class="comment">// Binary search (requires sorted)</span>
+<span class="keyword">auto</span> it = std::lower_bound(v.<span class="function">begin</span>(), v.<span class="function">end</span>(), <span class="number">4</span>);
+<span class="keyword">int</span> idx = it - v.<span class="function">begin</span>();  <span class="comment">// Iterator to index</span>
+
+<span class="comment">// Finding</span>
+<span class="keyword">auto</span> found = std::find(v.<span class="function">begin</span>(), v.<span class="function">end</span>(), <span class="number">5</span>);
+<span class="keyword">if</span>(found != v.<span class="function">end</span>()) {
+    std::cout << <span class="string">"Found!\n"</span>;
+}
+
+<span class="comment">// Min/Max</span>
+<span class="keyword">auto</span> minIt = std::min_element(v.<span class="function">begin</span>(), v.<span class="function">end</span>());
+<span class="keyword">auto</span> maxIt = std::max_element(v.<span class="function">begin</span>(), v.<span class="function">end</span>());
+
+<span class="comment">// Count</span>
+<span class="keyword">int</span> count = std::count(v.<span class="function">begin</span>(), v.<span class="function">end</span>(), <span class="number">1</span>);
+
+<span class="comment">// Accumulate (sum)</span>
+<span class="keyword">int</span> sum = std::accumulate(v.<span class="function">begin</span>(), v.<span class="function">end</span>(), <span class="number">0</span>);
+
+<span class="comment">// Transform</span>
+std::transform(v.<span class="function">begin</span>(), v.<span class="function">end</span>(), v.<span class="function">begin</span>(),
+               [](<span class="keyword">int</span> x) { <span class="keyword">return</span> x * <span class="number">2</span>; });
+
+<span class="comment">// Remove + erase idiom</span>
+v.<span class="function">erase</span>(std::remove(v.<span class="function">begin</span>(), v.<span class="function">end</span>(), <span class="number">2</span>), v.<span class="function">end</span>());</code></pre>
+
+                <h3>Time Complexity Reference</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operation</th>
+                            <th>vector</th>
+                            <th>map</th>
+                            <th>unordered_map</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Access</td>
+                            <td>O(1)</td>
+                            <td>O(log n)</td>
+                            <td>O(1) avg</td>
+                        </tr>
+                        <tr>
+                            <td>Insert</td>
+                            <td>O(n)</td>
+                            <td>O(log n)</td>
+                            <td>O(1) avg</td>
+                        </tr>
+                        <tr>
+                            <td>Search</td>
+                            <td>O(n)</td>
+                            <td>O(log n)</td>
+                            <td>O(1) avg</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="note" style="margin-top: 30px;">
+            <strong>📱 Mobile Viewing Tips:</strong>
+            <ul>
+                <li>Use portrait orientation for best readability</li>
+                <li>Pinch to zoom on code examples</li>
+                <li>Click section headers to expand/collapse</li>
+                <li>Bookmark this page for offline access</li>
+            </ul>
+        </div>
+
+        <div class="tip" style="margin-top: 20px;">
+            <strong>💾 Saving This Page:</strong>
+            <ul>
+                <li><strong>Desktop:</strong> Ctrl+S / Cmd+S → Save as HTML</li>
+                <li><strong>Mobile:</strong> Browser menu → Save page / Add to Reading List</li>
+                <li><strong>PDF:</strong> Browser Print → Save as PDF</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let allExpanded = false;
+
+        function toggleSection(header) {
+            const section = header.parentElement;
+            const content = section.querySelector('.section-content');
+            
+            section.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        function toggleAll() {
+            const sections = document.querySelectorAll('.section');
+            const button = document.querySelector('.expand-all');
+            
+            allExpanded = !allExpanded;
+            
+            sections.forEach(section => {
+                const content = section.querySelector('.section-content');
+                if(allExpanded) {
+                    section.classList.add('active');
+                    content.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                    content.classList.remove('active');
+                }
+            });
+            
+            button.textContent = allExpanded ? 'Collapse All Sections' : 'Expand All Sections';
+        }
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Open the section if it's closed
+                const section = target.closest('.section');
+                if(section && !section.classList.contains('active')) {
+                    toggleSection(section.querySelector('.section-header'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
